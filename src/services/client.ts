@@ -1,5 +1,6 @@
 import axios, { type AxiosInstance } from "axios";
 import { API_BASE_URL } from "./routes";
+import { ApiError } from "../utils/errors";
 
 export type ApiClient = AxiosInstance;
 
@@ -20,14 +21,15 @@ apiClient.interceptors.response.use(
       window.dispatchEvent(new Event("auth:unauthorized"));
     }
 
+    if (axios.isAxiosError<{ message?: string; errors?: Record<string, string> }>(error)) {
+      const message = error.response?.data?.message ?? error.message;
+      const status = error.response?.status ?? 500;
+
+      return Promise.reject(
+        new ApiError(message, status, error.response?.data?.errors),
+      );
+    }
+
     return Promise.reject(error);
   },
 );
-
-export const getApiErrorMessage = (error: unknown, fallback: string) => {
-  if (axios.isAxiosError<{ message?: string }>(error)) {
-    return error.response?.data?.message ?? error.message ?? fallback;
-  }
-
-  return error instanceof Error ? error.message : fallback;
-};

@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { loginSchema } from "./LoginValidation";
 import type { LoginFormData } from "../../../types/auth";
-import { getApiErrorMessage } from "../../../services/client";
+import { getApiErrorMessage } from "../../../utils/errors";
 import { login } from "../../../features/auth/authSlice";
 import { useAppDispatch } from "../../../redux/hooks";
 
