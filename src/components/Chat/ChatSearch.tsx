@@ -1,6 +1,6 @@
 import { Search } from "lucide-react";
 
-export default function ChatSearch() {
+export default function ChatSearch({ value, onChange }: { value: string; onChange: (value: string) => void }) {
   return (
     <div className="w-full shrink-0 bg-white p-3 sm:p-4">
       <div className="flex h-10 items-center gap-3 rounded-lg bg-[#f0f2f5] px-3">
@@ -8,7 +8,9 @@ export default function ChatSearch() {
 
         <input
           type="text"
-          placeholder="Search or start new chat"
+          placeholder="Search by phone number"
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
           className="bg-transparent outline-none w-full text-sm"
         />
       </div>
