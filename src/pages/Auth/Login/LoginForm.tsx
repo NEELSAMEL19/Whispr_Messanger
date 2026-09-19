@@ -87,7 +87,7 @@ const LoginForm = () => {
       const redirectTo = state?.from;
       const safeRedirect = redirectTo?.pathname?.startsWith("/") && !redirectTo.pathname.startsWith("//")
         ? `${redirectTo.pathname}${redirectTo.search ?? ""}${redirectTo.hash ?? ""}`
-        : "/dashboard";
+        : "/chat";
 
       navigate(safeRedirect, { replace: true });
     } catch (error) {

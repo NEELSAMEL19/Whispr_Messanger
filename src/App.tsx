@@ -4,10 +4,7 @@ import NotFoundPage from "./components/Basic/NotFound/NotFound";
 import { useAppSelector } from "./redux/hooks";
 import Login from "./pages/Auth/Login/Login";
 import Register from "./pages/Auth/Register/Register";
-
-const Dashboard = () => {
-  return <div className="min-h-screen" />;
-};
+import Chat from "./pages/Chat/Chat";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const status = useAppSelector((state) => state.auth.status);
@@ -32,7 +29,7 @@ const PublicRoute = ({ children }: { children: React.ReactNode }) => {
   }
 
   return status === "authenticated" ? (
-    <Navigate to="/dashboard" replace />
+    <Navigate to="/chat" replace />
   ) : (
     <>{children}</>
   );
@@ -59,13 +56,14 @@ const App = () => {
         }
       />
       <Route
-        path="/dashboard"
+        path="/chat"
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <Chat />
           </ProtectedRoute>
         }
       />
+      <Route path="/dashboard" element={<Navigate to="/chat" replace />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

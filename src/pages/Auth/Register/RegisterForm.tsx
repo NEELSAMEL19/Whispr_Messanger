@@ -89,7 +89,7 @@ const RegisterForm = () => {
     setFormError("");
     try {
       await dispatch(register(result.data)).unwrap();
-      navigate("/dashboard", { replace: true });
+      navigate("/chat", { replace: true });
     } catch (error) {
       setFormError(getApiErrorMessage(error, "Unable to create account. Please try again."));
     } finally {
