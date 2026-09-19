@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { registerSchema } from "./RegisterValidation";
 import type { RegisterFormData } from "../../../types/auth";
-import { getApiErrorMessage } from "../../../services/client";
+import { getApiErrorMessage } from "../../../utils/errors";
 import { register } from "../../../features/auth/authSlice";
 import { useAppDispatch } from "../../../redux/hooks";
 
